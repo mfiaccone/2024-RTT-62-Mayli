@@ -92,7 +92,7 @@ public class Homework303_2_1 {
         double bagel = 1.50;
         double latte = 7.50;
         double tea = 3.50;
-        
+
         double subtotal = ((bagel * 3) + (latte * 4) + (tea *2));
 
         final double SALES_TAX = .09;
@@ -101,6 +101,7 @@ public class Homework303_2_1 {
         System.out.println(totalSale);
 
     // stuck on formatting to only two decimal points
+        //use Math.round(totalSale * 100.0) / 100.0 or decimal format to do it, notes in FirstJavaClass at bottom
 
 
     }
