@@ -1,4 +1,4 @@
-package PA_303_2_2;
+package org.example.PA_303_2_2;
 
 import java.util.Scanner;
 

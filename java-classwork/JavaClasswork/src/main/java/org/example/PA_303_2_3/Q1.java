@@ -1,4 +1,4 @@
-package PA_303_2_3;
+package org.example.PA_303_2_3;
 
 public class Q1 {
 
@@ -10,7 +10,7 @@ public class Q1 {
         System.out.println(x);
         System.out.println(Integer.toBinaryString(x));
 
-
+//said we did not have to do bitwise shifts (Q2 as well)
 
 
 
