@@ -29,14 +29,7 @@ public class ArrayInsert {
 
     }
 
-
-
-
-    // original implementation inserted a 9 at position 2
-    public static void main(String[] args) {
-
-
-
+    public void run() {
         // original array
         // position 01234
         // value    12345
@@ -54,8 +47,18 @@ public class ArrayInsert {
 
         //inserting 0 at position 0
         array = insert(array, 0, 0);
-       System.out.println(Arrays.toString(array));
-       
+        System.out.println(Arrays.toString(array));
+    }
+
+
+    // original implementation inserted a 9 at position 2
+    public static void main(String[] args) {
+        ArrayInsert main = new ArrayInsert();
+        main.run();
+
+
+
+
 
 
     }
