@@ -1,4 +1,4 @@
-package coffeeshop;
+package org.example.coffeeshop;
 
 import java.util.ArrayList;
 import java.util.List;
