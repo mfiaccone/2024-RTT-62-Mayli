@@ -3,6 +3,10 @@ package org.example;
 public class SBA1Practice {
 
     public static void main(String[] args) {
+
+
+
+
         String s  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         //part 1 - create a for loop to print each character of the string s on its own line
