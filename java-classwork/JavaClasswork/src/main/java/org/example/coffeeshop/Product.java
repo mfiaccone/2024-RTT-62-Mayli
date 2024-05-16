@@ -46,4 +46,22 @@ public class Product {
     public void setBeverage(boolean beverage) {
         this.beverage = beverage;
     }
+
+    public int getQuantityAvailable() {
+        return quantityAvailable;
+    }
+
+    public void setQuantityAvailable(int quantityAvailable) {
+        this.quantityAvailable = quantityAvailable;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "price=" + price +
+                ", name='" + name + '\'' +
+                ", beverage=" + beverage +
+                ", quantityAvailable=" + quantityAvailable +
+                '}';
+    }
 }

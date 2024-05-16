@@ -21,6 +21,7 @@ public class Main {
         System.out.println("Enter your choice ");
         int option = scanner.nextInt();
 
+
     }
 
     public void runCoffeeShop() {
