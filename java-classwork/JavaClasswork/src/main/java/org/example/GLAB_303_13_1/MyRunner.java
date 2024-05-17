@@ -1,4 +1,4 @@
-package GLAB_303_13_1;
+package org.example.GLAB_303_13_1;
 
 
 import java.io.File;
