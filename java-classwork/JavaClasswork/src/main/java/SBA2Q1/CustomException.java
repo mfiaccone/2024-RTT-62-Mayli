@@ -7,6 +7,4 @@ public class CustomException extends Exception {
         super(message);
     }
     // that is part one
-
-
 }
