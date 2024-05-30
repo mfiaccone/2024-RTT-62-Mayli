@@ -53,6 +53,9 @@ from customers c
 left join orders on c.id = orders.customer_id 
 where orders.customer_id is null;
 
+-- OR
+select * from customers where id not in (select customer_id from orders);
+
 -- Question 1
 -- How many cusotmers are handled by each office. I want to see the office name and the count of the number of customers in that office.
 select o.city, count(c.customer_name)
@@ -76,6 +79,18 @@ from products p, customers c, orders o, orderdetails od
 where c.id = o.customer_id
 and o.id =  od.order_id
 and od.product_id = p.id;
+
+SELECT *
+FROM(
+SELECT  c.state, RANK() OVER(PARTITION BY c.state ORDER BY sum((p.msrp - p.buy_price) * od.quantity_ordered) DESC) state_rank, c.customer_name, c.id,
+sum((p.msrp - p.buy_price) * od.quantity_ordered) total_margin
+FROM customers c, orderdetails od, orders o, products p
+WHERE c.id = o.customer_id AND o.id = od.order_id AND p.id = od.product_id AND c.country = 'USA'
+GROUP BY c.id
+)t
+GROUP BY t.total_margin, t.customer_name, t.id
+HAVING t.state_rank < 6
+ORDER BY t.state, state_rank;
 
 
 -- Question 3
@@ -109,6 +124,7 @@ from orders o, orderdetails od
 where o.id = od.order_id
 and year(order_date) = 2004;
 
+select * from orders where year(order_date) = 2004;
 
 -- Question  6
 -- I want to see the total amount of all orders grouped by the year 
@@ -117,6 +133,10 @@ from orders o, orderdetails od
 where o.id = od.order_id
 order by order_year;
 
+select year(o.order_date), sum(od.quantity_ordered * price_each) as total_amount, count(distinct o.id) as order_count
+from orders o, orderdetails od
+where o.id = od.order_id
+group by year(o.order_date);
 
 -- Question 7 10398
 -- I want to see the top 5 products based on quantity sold across all orders 
@@ -126,6 +146,33 @@ where od.product_id = p.id
 order by od.quantity_ordered desc 
 limit 5;
 
+-- this is the correct way, I forgot to sum the quantity the first time 
+select p.product_name, sum(quantity_ordered) as total_ordered
+from orderdetails od, products p
+where od.product_id = p.id
+group by od.product_id
+order by total_ordered desc
+limit 5;
+
+-- doing it again but taking out canccelled orders 
+select p.product_name, sum(quantity_ordered) as total_ordered
+from orderdetails od, products p
+where od.product_id = p.id
+and od.order_id not in (select id from orders where status = 'Cancelled')
+group by od.product_id
+order by total_ordered desc
+limit 5;
+
+-- this is another way to do the above query 
+select p.product_name, sum(quantity_ordered) as total_ordered
+from orderdetails od, products p, orders o
+where od.product_id = p.id
+and od.order_id 
+and o.status != status = 'Cancelled'
+group by od.product_id
+order by total_ordered desc
+limit 5;
+
 -- Question 7.5
 -- How many times has each product appeared in an order regardless of how many were purchased
 select p.product_name, count(od.product_id) as appearance_number
@@ -133,14 +180,41 @@ from products p, orderdetails od
 where od.product_id = p.id
 group by p.product_name;
 
+-- how Eric did it 
+select p.product_name, count(p.id) as cnt
+from orderdetails od, products p
+where od.product_id = p.id
+group by p.id
+order by cnt desc;
+
+-- we can validate our results with 
+select * from orderdetails where product_id =1;
+
+
 
 -- Question 7.6 - data might not support this one 
 -- How many products would be out of stock based on the amount sold accross time. Basically looking for any product where the sum 
 -- of the quanitty sold is greater than the quantitiy in stock 
+
+-- this isn't right 
 select p.product_name, (od.quantity_ordered - p.quantity_in_stock) as deficit 
 from products p, orderdetails od 
 where od.product_id = p.id
 order by p.product_name;
+
+-- one way to do it
+select product_id, sum(quantity_ordered) as total_ordered, p.quantity_in_stock - sum(quantity_ordered) as overordered
+from orderdetails od, products p
+where p.id = od.product_id
+group by product_id
+having overordered < 0;
+
+-- another way to do it / this is the same answer written a different way 
+select product_id, p.product_name, sum(quantity_ordered) as total_ordered, p.quantity_in_stock
+from orderdetails od, products p
+where p.id = od.product_id
+group by product_id
+having total_ordered > (select quantity_in_stock from products pp where pp.id = od.product_id);
 
 
 -- Question 7.9 -- idk if this is right
@@ -148,6 +222,9 @@ order by p.product_name;
 select o.id, o.status
 from orders o
 order by status asc;
+
+-- correct answer
+select distinct status from orders order by status asc;
 
 
 -- Question 8 -- not sure if this is right, has duplicates
@@ -163,7 +240,13 @@ and od.product_id = p.id
 and p.productline_id = pl.id
 order by office_name;
 
-
-
-
-
+-- needed "distinct" to take out the duplicates 
+select distinct o.city as office_name, pl.product_line
+from offices o, employees e, customers c, orders ord, orderdetails od, products p, productlines pl
+where o.id = e.office_id
+and e.id = c.sales_rep_employee_id
+and c.id = ord.customer_id
+and ord.id = od.order_id
+and od.product_id = p.id
+and p.productline_id = pl.id
+order by office_name;
