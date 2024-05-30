@@ -230,7 +230,7 @@ INNER JOIN individual i ON c.CUST_ID = i.CUST_ID
 WHERE i.LAST_NAME RLIKE "T.*"; -- same as LIKE "T%";
 
 
--- ################ GLAB 304.6.2 ###################
+-- ################ GLAB 304.7.1 ###################
 
 -- Example 1
 SELECT  * FROM  departments WHERE  location_id = 1700;
