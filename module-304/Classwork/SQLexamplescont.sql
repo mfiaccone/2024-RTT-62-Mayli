@@ -46,5 +46,80 @@ group by od.product_id;
 
 -- testing save
 
+select l.name, min(o.amount) as min_offer, round(avg(o.amount),2) as avg_offer, max(o.amount) as max_offer, count(*) as offers
+from lots l, offers o
+where l.id = o.lot_id
+group by o.lot_id
+order by offers desc;
+
+select * from offers, lots;
+
+
+-- SBA 2 Notes
+
+-- Query 1
+select d.name, count(c.id)
+from department d, course c
+where d.id = c.deptID
+group by d.id
+order by count(c.id) asc, d.name asc;
+
+-- 3b
+select c.name, count(sc.studentId)
+from course c, studentCourse sc
+where c.id = sc.courseid
+group by c.id
+order by count(sc.studentId) desc, c.name asc;
+
+-- 3c1
+select c.name
+from course c
+where c.id not in (select courseID from facultyCourse)
+order by c.name asc;
+
+-- 3c2
+select c.name, count(sc.studentid) as cnt
+from course c, studentcourse sc
+where c.id not in (select courseID from facultyCourse)
+and c.id = sc.courseid
+group by c.id
+order by cnt desc, c.name asc;
+
+-- 3d make sure you use the distinct studentid 
+select count(distinct sc.studentid) as Students, year(startdate) as year 
+from studentcourse sc
+group by year(sc.startdate)
+order by year asc, students desc;
+
+-- 3e
+select sc.startdate, count(distinct sc.studentid) as students
+from studentcourse sc 
+where month(startdate) = 8
+group by startdate
+order by startdate asc, students asc;
+
+-- 3f
+select s.firstname, s.lastname, count(sc.courseid) as course_count
+from student s, studentcourse sc, course c
+where s.id = sc.studentid
+and sc.courseid = c.id
+and c.deptid = s.majorid
+group by s.id
+order by course_count desc, firstname asc, lastname asc; 
+
+-- 3g -- may need to use round instead of format
+select s.firstname, s.lastname, format(avg(progress),1) as avg_progress
+from student s, studentcourse sc 
+where s.id = sc.studentid
+group by s.id
+having avg_progress < 50
+order by avg_progress desc, firstname asc, lastname asc;
+
+-- 3h1
+select c.name, avg(progress) as avg_progress
+from course c, studentcourse sc
+where c.id = sc.courseid
+
+
 
 
