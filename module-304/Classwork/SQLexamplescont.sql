@@ -119,7 +119,42 @@ order by avg_progress desc, firstname asc, lastname asc;
 select c.name, avg(progress) as avg_progress
 from course c, studentcourse sc
 where c.id = sc.courseid
+group by c.id
+order by avg_progress desc, c.name asc;
 
+-- 3h2
+select format(avg(progress),1) as avg_progress, c.name
+from course c, studentcourse sc
+where c.id = sc.courseid
+group by c.id
+order by avg_progress desc, c.name asc
+limit 1;
 
+-- 3h3
+select firstname, lastname
+from faculty f, facultycourse fc, studentcourse sc
+where f.id = fc.facultyid
+and fc.courseid = sc.courseid
+group by f.id
+order by avg_progress desc; 
 
+-- 3i
+select firstname, lastname, min(progress), max(progress),
+case
+when min(progress) < 40 then 'F'
+when min(progress) < 50 then 'D'
+when min(progress) < 60 then 'C'
+when min(progress) < 70 then 'b'
+else 'A'
+end as min_grade,
+case
+when max(progress) < 40 then 'F'
+when max(progress) < 50 then 'D'
+when max(progress) < 60 then 'C'
+when max(progress) < 70 then 'B'
+else 'A'
+end as max_grade
+from student s, studentcourse sc
+where s.id = sc.student_id 
+group by s.id;
 
