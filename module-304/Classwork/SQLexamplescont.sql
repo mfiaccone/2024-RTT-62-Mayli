@@ -155,6 +155,24 @@ when max(progress) < 70 then 'B'
 else 'A'
 end as max_grade
 from student s, studentcourse sc
-where s.id = sc.student_id 
+where s.id = sc.studentid 			
 group by s.id;
 
+SELECT firstname AS "First Name", lastname AS "Last Name",
+    CASE
+        WHEN MIN(progress) < 40 THEN 'F'
+        WHEN MIN(progress) < 50 THEN 'D'
+        WHEN MIN(progress) < 60 THEN 'C'
+        WHEN MIN(progress) < 70 THEN 'B'
+        ELSE 'A'
+    END AS "Minimum Grade",
+    CASE
+        WHEN MAX(progress) < 40 THEN 'F'
+        WHEN MAX(progress) < 50 THEN 'D'
+        WHEN MAX(progress) < 60 THEN 'C'
+        WHEN MAX(progress) < 70 THEN 'B'
+        ELSE 'A'
+    END AS "Maximum Grade"
+FROM student s, studentcourse sc
+WHERE s.id = sc.studentId
+GROUP BY s.id;
