@@ -7,7 +7,7 @@ public class JDBCDemo {
     public static void main(String[] args) throws ClassNotFoundException {
         String dburl = "jdbc:mysql://localhost:3306/classic_models";
         String user = "mayli";
-        String password = "Z!aa17BM";
+        String password = "DevPassword!";
         System.out.println("-------- MySQL JDBC Connection Demo ------------");
 
 
