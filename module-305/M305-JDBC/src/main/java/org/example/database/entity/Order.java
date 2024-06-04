@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 
 @Setter
@@ -22,13 +22,16 @@ public class Order {
     private Integer customerId;
 
     @Column(name = "order_date")
-    private LocalDate orderDate;
+    @Temporal(TemporalType.DATE)
+    private Date orderDate;
 
     @Column(name = "required_date")
-    private LocalDate requiredDate;
+    @Temporal(TemporalType.DATE)
+    private Date requiredDate;
 
     @Column(name = "shipped_date")
-    private LocalDate shippedDate;
+    @Temporal(TemporalType.DATE)
+    private Date shippedDate;
 
     @Column(name = "status")
     private String status;
