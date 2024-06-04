@@ -1,13 +1,17 @@
 package org.example.database.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "products")
 public class Product {
 
@@ -31,16 +35,16 @@ public class Product {
     @Column(name = "product_vendor")
     private String productVendor;
 
-    @Column(name = "product_description")
+    @Column(name = "product_description", length = 65535, columnDefinition="Text")
     private String productDescription;
 
-    @Column(name = "quantity_in_stock")
+    @Column(name = "quantity_in_stock", columnDefinition="smallint")
     private Integer quantityInStock;
 
-    @Column(name = "buy_price")
+    @Column(name = "buy_price", columnDefinition="Decimal")
     private Double buyPrice;
 
-    @Column(name = "msrp")
+    @Column(name = "msrp", columnDefinition="Decimal")
     private Double msrp;
 
 }
