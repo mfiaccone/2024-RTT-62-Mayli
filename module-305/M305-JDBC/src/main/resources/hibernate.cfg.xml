@@ -28,10 +28,10 @@
         <!-- this tells hibernate which entities you have in your project -->
         <!-- each entity needs to have a line here in the configuration file -->
         <mapping class="org.example.database.entity.Employee"/>
-<!--        <mapping class="org.example.database.entity.Customer"/>-->
-<!--        <mapping class="org.example.database.entity.Order"/>-->
-<!--        <mapping class="org.example.database.entity.OrderDetails"/>-->
-<mapping class="org.example.database.entity.Product"/>
+        <mapping class="org.example.database.entity.Customer"/>
+        <mapping class="org.example.database.entity.Order"/>
+        <mapping class="org.example.database.entity.OrderDetails"/>
+        <mapping class="org.example.database.entity.Product"/>
 
     </session-factory>
 </hibernate-configuration>

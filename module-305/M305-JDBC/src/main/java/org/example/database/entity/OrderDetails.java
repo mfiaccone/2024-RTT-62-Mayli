@@ -29,10 +29,10 @@ public class OrderDetails {
     @Column(name = "quantity_ordered")
     private Integer quantityOrdered;
 
-    @Column(name = "price_each")
-    private Double priceEach;
+    @Column(name = "price_each", columnDefinition = "DECIMAL")
+    private Float priceEach;
 
-    @Column(name = "order_line_number")
+    @Column(name = "order_line_number", columnDefinition = "SMALLINT")
     private Integer orderLineNumber;
 
 

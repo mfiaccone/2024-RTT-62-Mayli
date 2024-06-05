@@ -1,15 +1,13 @@
 package org.example.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
-    @Setter
+@Setter
     @Getter
     @Entity
+    @ToString
     @NoArgsConstructor
     @AllArgsConstructor
     @Table(name = "customers")
@@ -53,7 +51,7 @@ import lombok.Setter;
         @Column(name = "sales_rep_employee_id")
         private Integer salesRepEmployeeId;
 
-        @Column(name = "credit_limit")
-        private Double creditLimit;
+        @Column(name = "credit_limit", columnDefinition = "DECIMAL")
+        private Float creditLimit;
 
     }
