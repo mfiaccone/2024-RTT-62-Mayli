@@ -3,6 +3,8 @@ package org.example.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -17,6 +19,12 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // this is telling hibernate that the PK is auto incremented
     @Column(name = "id")
     private Integer id;
+
+    //this is essentially a customerDAO.findByEmployeeId(123)
+    //select c.* from customers c, employees e where c.sales_rep_employee_id = e.id and c.sales_rep_employee_id = 123
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Customer> customers;
 
     @Column(name = "office_id")
     private Integer officeId;

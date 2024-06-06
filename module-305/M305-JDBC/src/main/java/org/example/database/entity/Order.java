@@ -1,17 +1,16 @@
 package org.example.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Setter
 @Getter
 @Entity
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders")
@@ -21,6 +20,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // this is telling hibernate that the PK is auto incremented
     @Column(name = "id")
     private Integer id;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Customer> customer;
 
     @Column(name = "customer_id")
     private Integer customerId;

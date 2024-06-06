@@ -98,7 +98,7 @@ public class CustomerDAO {
         Session session = factory.openSession();
 
         String hql = "SELECT c FROM Customer c where c.id = :id";
-        
+
         TypedQuery<Customer> query = session.createQuery(hql,Customer.class);
 
         query.setParameter("id", id);

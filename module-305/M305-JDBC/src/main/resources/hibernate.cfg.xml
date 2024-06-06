@@ -19,7 +19,7 @@
         <property name="connection.pool_size">3</property>
 
         <!-- these next two are nice to show what query hibernate is running you can turn them on and off -->
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
         <property name="format_sql">true</property>
 
         <!-- this is the validation for hibernate / this shows us the errors we wouldn't see until it fails to run-->
@@ -32,6 +32,8 @@
         <mapping class="org.example.database.entity.Order"/>
         <mapping class="org.example.database.entity.OrderDetails"/>
         <mapping class="org.example.database.entity.Product"/>
+
+<!--        <property name="current_session_context_class">thread</property>-->
 
     </session-factory>
 </hibernate-configuration>

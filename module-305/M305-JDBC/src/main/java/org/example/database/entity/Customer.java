@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-@Setter
+    @Setter
     @Getter
     @Entity
     @ToString
@@ -13,10 +13,13 @@ import lombok.*;
     @Table(name = "customers")
     public class Customer {
 
+        //ordering in this file does not matter
+
         @Id // this is telling hibernate this column is the PK
         @GeneratedValue(strategy = GenerationType.IDENTITY) // this is telling hibernate that the PK is auto incremented
-        @Column(name = "id")
+        @Column(name = "id", insertable = false, updatable = false)
         private Integer id;
+
 
         @Column(name = "customer_name")
         private String customerName;
@@ -48,10 +51,25 @@ import lombok.*;
         @Column(name = "country")
         private String country;
 
-        @Column(name = "sales_rep_employee_id")
+        // this is allowing hibernate to make this query
+        // select e.* from customers c, employee e where c.sales_rep_employee_id = e.id and c.id = ###;
+        @ToString.Exclude
+        @ManyToOne(fetch = FetchType.LAZY, optional = true)
+        @JoinColumn(name = "sales_rep_employee_id", nullable = true)
+        private Employee employee;
+
+        //because we added the @ManyToOne annotation (just above) this column is now considered a duplicate in hibernate
+        //by adding the insertable = false and the updatable = false we are essentially turning this into a read only variable!!!!
+        //this will happen for an FK that we use with a @ManyToOne annotation
+        @Column(name = "sales_rep_employee_id", insertable = false, updatable = false)
         private Integer salesRepEmployeeId;
 
         @Column(name = "credit_limit", columnDefinition = "DECIMAL")
         private Float creditLimit;
+
+        @ToString.Exclude
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "id", nullable = false)
+        private Order order;
 
     }
