@@ -2,8 +2,10 @@ package org.example.database.dao;
 
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+import org.example.database.entity.Employee;
 import org.example.database.entity.Order;
 import org.example.database.entity.Order;
+import org.example.database.entity.OrderDetail;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -62,5 +64,6 @@ public class OrderDAO {
             session.close();
         }
     }
+
 
 }
