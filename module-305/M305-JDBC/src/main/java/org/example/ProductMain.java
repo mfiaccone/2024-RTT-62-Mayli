@@ -1,6 +1,6 @@
-package org.example.database;
+package org.example;
 
-import org.example.Main;import org.example.database.dao.ProductDAO;
+import org.example.database.dao.ProductDAO;
 import org.example.database.entity.Product;
 
 import java.util.InputMismatchException;
@@ -113,7 +113,7 @@ public class ProductMain {
 
     public static void main(String[] args) {
 
-        Main.ProductMain pm = new Main.ProductMain();
+        ProductMain pm = new ProductMain();
         pm.run();
     }
 }

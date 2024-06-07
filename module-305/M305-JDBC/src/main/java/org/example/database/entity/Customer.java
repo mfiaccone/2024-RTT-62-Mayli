@@ -3,8 +3,10 @@ package org.example.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 
-    @Setter
+
+@Setter
     @Getter
     @Entity
     @ToString
@@ -17,7 +19,7 @@ import lombok.*;
 
         @Id // this is telling hibernate this column is the PK
         @GeneratedValue(strategy = GenerationType.IDENTITY) // this is telling hibernate that the PK is auto incremented
-        @Column(name = "id", insertable = false, updatable = false)
+        @Column(name = "id", insertable=false, updatable=false)
         private Integer id;
 
 
@@ -67,9 +69,8 @@ import lombok.*;
         @Column(name = "credit_limit", columnDefinition = "DECIMAL")
         private Float creditLimit;
 
-        @ToString.Exclude
-        @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "id", nullable = false)
-        private Order order;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Order> orders;
 
     }

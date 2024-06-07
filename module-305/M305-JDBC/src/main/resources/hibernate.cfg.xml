@@ -9,6 +9,7 @@
         <!-- these two lines tell hibernate that we are using MySQL datamase -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/classic_models</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
 
         <!-- this is the database connection information -->
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
@@ -30,7 +31,7 @@
         <mapping class="org.example.database.entity.Employee"/>
         <mapping class="org.example.database.entity.Customer"/>
         <mapping class="org.example.database.entity.Order"/>
-        <mapping class="org.example.database.entity.OrderDetails"/>
+        <mapping class="org.example.database.entity.OrderDetail"/>
         <mapping class="org.example.database.entity.Product"/>
 
 <!--        <property name="current_session_context_class">thread</property>-->

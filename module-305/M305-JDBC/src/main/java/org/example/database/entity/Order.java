@@ -2,31 +2,39 @@ package org.example.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.query.Page;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-
-@Setter
 @Getter
-@Entity
+@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "orders")
 public class Order {
 
-    @Id // this is telling hibernate this column is the PK
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // this is telling hibernate that the PK is auto incremented
-    @Column(name = "id")
-    private Integer id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Customer> customer;
+    private List<OrderDetail> orderDetails;
 
-    @Column(name = "customer_id")
-    private Integer customerId;
+
+    @Column(name = "customer_id", insertable = false, updatable = false)
+    private int customerId;
 
     @Column(name = "order_date")
     @Temporal(TemporalType.DATE)
@@ -36,15 +44,10 @@ public class Order {
     @Temporal(TemporalType.DATE)
     private Date requiredDate;
 
-    @Column(name = "shipped_date")
-    @Temporal(TemporalType.DATE)
-    private Date shippedDate;
-
     @Column(name = "status")
     private String status;
 
-    @Column(name = "comments")
-    private String comments;
-
+    @Column(name = "comments",columnDefinition = "Text")
+    private String comment;
 
 }
