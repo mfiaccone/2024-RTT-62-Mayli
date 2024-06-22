@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Loop:ital@0;1&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+<style>
+
+    body {
+        background-color: #2F7F71;
+    }
+
+    .zen-loop-regular {
+    font-family: "Zen Loop", cursive;
+    font-weight: 400;
+    font-size: 100px;
+    font-style: normal;
+    }
+
+    .container {
+            border: 5px solid black; /* Border styling */
+            padding: 20px; /* Padding inside the box */
+            background-color: #1A8D71; /* Background color of the box */
+            text-align: center; /* Center align text and elements */
+            max-width: 200px; /* Set maximum width for the box */
+            position: absolute;
+            top: 30%;
+            left: 30%;
+        }
+
+        img {
+            height: 100px; /* Make the image responsive within its container */
+
+            display: flex; /* Remove default inline spacing */
+            justify-content: center;
+            margin-bottom: 30px; /* Adjust spacing between image and dropdown */
+        }
+
+        select {
+            width: 100%; /* Make dropdown full width */
+            padding: 10px; /* Add padding for better appearance */
+            font-size: 16px; /* Adjust font size for better readability */
+        }     
+
+</style>
+
+<div class="zen-loop-regular">Welcome! Come meet my pets.</div>
+
+<div class="container">
+    <div>
+        <img 
+        height="100"
+        src="https://64.media.tumblr.com/1f5520360dd55d15978a12bf91b8218d/tumblr_nz1s5pbMz31rihtq2o1_400.gifv">
+    </div>
+
+    <div style="padding-top:15px">
+        <select onchange="location = this.value;">
+            
+            <option value="http://127.0.0.1:5500/welcome.html">Select Pet</option>
+            <option value="http://127.0.0.1:5500/kandy.html">Kandy</option>
+            <option value="http://127.0.0.1:5500/colby.html">Colby</option>
+            <option value="http://127.0.0.1:5500/claude.html">Claude</option>
+
+        </select>
+    </div>
+
+</div>
+
+
+</body>
+</html>
