@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<link rel="stylesheet" href="/css/global.css">
+
+<style>
+    
+    /* this begins with a . so it becomes a CSS Class. To use this 
+    class you need to add class="css=class" to the html element*/
+    .css-class {
+        background-color:bisque;
+        padding:15px;
+        margin:15px;
+        border:15px solid black;
+    }
+
+    /* this is a css comment */
+    /* this is CSS for all p tags on this page
+    when there is no dot then it is for an html tag itself*/
+
+    p {
+        background-color: aquamarine;
+        font-size: 40px;
+    }
+
+    a {
+        color: red;
+        text-decoration: underline;
+    }
+
+
+</style>
+
+<body style="background-color: lightgrey;">
+    <h1>Title tag</h1>
+
+    <!-- adding the background color green as as tyle overirdes the style in the css class-->
+    <div class="css-class" style="background-color: green;">Some longer span text with a different color</div>
+
+
+    <div style="background-color:bisque; 
+                padding:15px;
+                margin:15px;
+                border:5px solid black">Some longer span text with a different color</div>
+
+    <!-- adding the style tag is adding a new css style that is not in the css class -->
+    <div class="css-class" style="width:50%">Some longer span of text with a different color</div>
+
+    <p>This is some text in a paragraph tag</p>
+    <p>This is different text</p>
+
+    <a href="/index.html">This is an index link</a>
+</body>
+</html>

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -51,6 +53,42 @@ public class EmployeeDAOTest {
         Assertions.assertNotNull(employee);
         Assertions.assertEquals(firstName, thisEmployee.getFirstname());
     }
+
+    // another way to do the above test below
+
+    @Test
+    public void FindByFirstNameSecondTest() {
+        String firstName = "Leslie";
+
+        //when
+        List<Employee> employees = employeeDao.findByFirstName(firstName);
+
+        //then
+        Assertions.assertTrue(employees.size() > 0);
+        for ( Employee e : employees ) {
+            Assertions.assertEquals(firstName, e.getFirstname());
+        }
+    }
+
+    //a third way to do the above test using a parameterized test
+
+    @ParameterizedTest
+    @CsvSource ( { "Leslie", "Tom" } )
+    public void findByFirstNameThirdTest (String firstName) {
+            //given (in the csv source now)
+
+        //when
+        List<Employee> employees = employeeDao.findByFirstName(firstName);
+
+        //then
+        Assertions.assertTrue(employees.size() > 0);
+        for ( Employee e : employees ) {
+            Assertions.assertEquals(firstName, e.getFirstname());
+
+    }
+}
+
+
 
     @Test
     public void findByInvalidFirstNameTest() {
@@ -107,4 +145,38 @@ public class EmployeeDAOTest {
 
     }
 
+    // eric's example
+    @Test
+    public void createEmployeeTest() {
+
+        Employee given = new Employee();
+
+        given.setFirstname("Test Employee");
+        given.setLastname("Lastname");
+        given.setJobTitle("Job Title");
+        given.setEmail("employee@employee.com");
+        given.setOfficeId(1);
+        given.setExtension("24");
+        given.setReportsTo(1088);
+        given.setVacationHours(10);
+        given.setProfileImageUrl("http://example.com/profile/testemployee");
+
+        employeeDao.insert(given);
+        //right here.. given is going to have an id
+        //hibernate will create the new PK id value and set it on the given object as part of the save
+
+        Employee actual = employeeDao.findById(given.getId());
+
+        Assertions.assertEquals(given.getFirstname(), actual.getFirstname());
+        Assertions.assertEquals(given.getLastname(), actual.getLastname());
+        // ... add all the rest of the assertions here to validate the object is the same
+
+        //now lets delete the record from the database
+        employeeDao.delete(given);
+
+        //we could do even one more after this to verify that it is indeed gone
+        Employee delete = employeeDao.findById(given.getId());
+        Assertions.assertNull(delete);
+
+    }
 }

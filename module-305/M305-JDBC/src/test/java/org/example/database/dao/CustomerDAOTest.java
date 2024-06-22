@@ -1,6 +1,6 @@
 package org.example.database.dao;
 
-import junit.framework.TestCase;
+
 import org.example.database.entity.Customer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -76,4 +76,7 @@ public class CustomerDAOTest {
         Assertions.assertEquals(given.getCustomerName(), actual.getCustomerName());
         Assertions.assertEquals(given.getContactFirstName(), actual.getContactFirstName());
     }
+
+
+
 }
