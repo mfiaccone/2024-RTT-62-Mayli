@@ -16,6 +16,46 @@
 
         console.log("hello world")
 
+        const variable="ABC123";
+
+        name("p1", "p2");
+
+        let x = name("parameter", "p2");
+        console.log(x);
+
+        //most of the time 
+        // somethign esl 
+        let b = true;
+        let B = new Boolean(true); // this just doesn't get done very often in practice 
+
+        function name(param, param2) {
+            console.log("In function " + param + " " + param2 + " " + variable)
+            return "ABC";
+        }
+
+        const person = {
+		firstName: "John", 
+		lastName: "Doe", 
+		age: 50, 
+		eyeColor: "blue"
+	};
+
+	console.log(person.firstName + " is " + person["age"] + " years old.");
+
+    //we can update variables in the person object 
+    person.firstName= "ABC";
+    person["age"] = 24;
+
+    //we can add varaibles to the person object like this 
+    person.newVariable = "123";
+    person["anotherVariable"] = "XYZ";
+
+    console.log(person);
+
+    //arrays
+    let array = [1, 2, 3, 4, 5];
+    console.log("Array length ")
+
     </script>
 </body>
 </html>
