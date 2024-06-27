@@ -5,7 +5,7 @@ body {
 
 .hero {
     height: 45vh;
-    background-color: #2F7F71;
+    background-color: #6DA59B;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,7 +45,7 @@ body {
 
 .survey-section {
     height: 40vh;
-    background-color: #6DA59B;
+    background-color: lightgrey;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,13 +69,20 @@ body {
 }
 
 .bottom {
-    height: 20vh;
-    background-color: #2F7F71;
+    height: 30vh;
+    background-color: #6DA59B;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-end;
+    align-items: flex-;
     
+}
+
+.bottom-content {
+    padding: 0 15%;
+    margin-bottom: 0px;
+    text-align: center;
+    width: 100%;
 }
 
 
@@ -93,7 +100,7 @@ body {
     font-family: "Zen Loop", cursive;
     font-weight: 400;
     font-size: 30px;
-    color: white;
+    color: black;
     font-style: normal;
     margin: 15px;
     
@@ -107,4 +114,8 @@ body {
 
 #left-picture {
     margin-left: 160px;
+}
+
+#table {
+    max-width: 600px;
 }
