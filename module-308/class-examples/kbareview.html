@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        // this is a comment in Javascript
+        let a = "Hello World";
+        console.log(a.substring(4,7)); // this is going to print out a substring from hello world from position 4 through 5
+        console.log("Lastindex = " + a.lastIndexOf("l")); // the last instance of l is in position 9
+
+        //what is z going to print? "x*y" bc it is a string, it's not going to do the calculation
+        let x = 5;
+        let y = 6;
+        let z = ("x*y");
+
+        console.log(z);
+
+        // the difference between == and ===
+        console.log("1" == 1); // true
+        console.log("1" == "1"); // true
+        console.log(1 == 1); // also true 
+        console.log("1" === 1); // false 
+
+        // one difference between let and var is you can only define something using let once
+        // with var it will allow more than once
+        let abc="123";
+        //let abc="asd"; // there is an error 
+
+        var xyz="123";
+        var xyz="asd"; // var will allow more than one definition in same code block (bad practice to do this) 
+
+        //how to make an alert box in javascript
+        //this can be nice for debugging
+        alert("some message to popup");
+
+        // in javascript we can concatinate strings using the +
+        // this is the same as Java
+        let str="Hello" + "world";
+        console.log(str); // this will print Hello world
+
+        // in javascript creating a date is very very flexible
+        // java is very strict
+        let date1 = new Date("Thu Jan 29 2009 17:34:41");
+        let date2 = new Date("01/02/2009");
+        console.log("Month = " + date1.getMonth());
+        console.log("Month = " + date2.getMonth());
+        console.log(date1.getMonth() === date2.getMonth()); // it needs to be able to have the values (for example date2 wouldnt be able to get the time)
+        // but they can both get the month even though they look different; answer true
+
+
+
+        // in javascript continue works the same as it does in java
+        // this is the same kind of for loop as in Java
+        // also break works the same way as it does in java 
+        // you could do continue or break, that's why it's comment off 
+        for (let i = 0 ; i < 5 ; i++) {
+            if ( i == 3 ) {
+                //continue;
+                break;
+            }
+            console.log(i);
+        }
+
+        // VERY COMMON GOTCHA - this is an every day mportant thing to know
+        let trick = 8 +"8";
+        console.log(trick) // answer is 88
+
+        // you cannot subtract a string from a string
+        // it is not causing a compile or run error
+        // NaN means... not a Number
+        let q = "Hello" - "World";
+        console.log(q);
+
+
+
+
+        // for loops
+        let person = {
+            firstName : "Eric",
+            lastName : "Heilig",
+            eyeColor : "brown"
+        }
+        // when we use in, it loops over the keys
+        //in means "loop over the keys"
+        for ( let i in person ) {
+            console.log(i + " = " + person[i]);
+        }
+
+        // of is looping over an array
+        let array = [ 1, 2, 3, 4];
+        for (let i of array ) {
+            console.log(i);
+        }
+
+        // 2 ways of registering an event listener
+        // first is using the onclick="functionToRun()" on a html tag like we did in buttonclick.html
+        // second using the addEventListner method built into the javascript language, this method is available on all HTML elements
+        // to use the addEventListner function first you have to query the element from the document
+        // then you can use the addEventLister('click', functionToRun());
+
+        // ** If you want to spend some time reading about and experimenting with splice() and slice()
+        // I have never in 20 years used either of these things
+        // TRUE - Array.splice() changes the original array whereas Array.slice() does not.
+
+        // 308.4 slide #28 talks about createing new HTML elements
+        // there are 2 ways of creating elements
+        // document.createElement('p');  this will create a new p tag in the document - can make all tags
+        // createTextNode()  // this only works for text nodes like a p tag
+
+        // Javascript tivia about numbers that is on the KBA
+        // number datatype in javascript is either an integer or a float
+
+        // ---------------------- forEach loop ---------------
+        // note that I put an extra comma after the 5 to make a 6th element in the array that is actually empty 
+        // the forEach method is called for each element in the array similar to a Java forEach but has differences
+        // the nice part of this forEach is that you get the actual value, the index or pos, and the array itself
+        // for each iteration of the loop
+        // index    0 1 2 3 4 5
+        let arr = [ 1,2,3,4,5, ];
+        arr.forEach( function(value, index, array) {
+            console.log("value = " + value);
+            console.log("index = " + index);
+        });
+
+        //(Empty string) “”, 0, false, null, undefined, and NaN are Falsy Values
+        // in the filter function using only a single variable in the function we are just getting the value in a variable called x
+        // the filter function is returning true or false, if it returns true then it will keep the element
+        // if it returnsn false it will remove the element 
+        // however!!!!! 0 is another way of repressing false
+        // SOOOOOO when x % 5 == 0 it is essentially returning false 
+        console.log(arr.filter( function(x) {
+            // when this evaluates to 0 it causes javascript to consider it false which then 
+            // it does not alter the original array, it creates a new array and removes anything that evaluates to false 
+            return x % 5;
+        }));
+
+    </script>
+
+
+</body>
+</html>

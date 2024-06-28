@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,80 +11,107 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Loop:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
     <section class="hero">
 
         <div class="hero-content">
             <h1 class="zen-loop-regular">Claude</h1>
 
-        
-        
         </div>
+
+        <div class="hero-details">
+            <div class=>
+                <h2 class="zen-loop-smaller">Favorite Things</h2>
+                <ul class="body-font">
+                    
+                        <li>Sleeping</li>
+                        <li>Chasing Colby</li>
+                        <li><em>Demanding</em> more food</li>
+                    
+                </ul>
+            </div>
+
+            <div class="donation-section">
+                <h2 class="zen-loop-smaller">Donate a Treat</h2>
+                <button id="donateTreatBtn" class="btn btn-outline-dark">Donate a Treat</button>
+                <p class="body-font">Total Treats Donated: <span id="totalTreats">0</span></p>
+            </div>
+
+            <form>
+                <div class="form-section">
+                    <label for="customRange1" class="zen-loop-smaller">How cute is Claude?</label>
+                    <input type="range" class="form-range" id="customRange1">
+
+                    <button type="submit" class="btn btn-outline-dark">Submit</button>
+                </div>
+            </form>
+        </div>
+
+
     </section>
 
     <section class="survey-section">
-        
+
         <div class="survey-content">
-            <img 
-            height="300"
-            id="left-picture"
-            src="claudeone.jpg">
-        </div>
-        
-        <div class="survey-content">
-            <img 
-            height="300"
-           
-            src="claudetwo.png">
+            <img height="300" id="left-picture" src="claudeone.jpg">
         </div>
 
-        
-                
+        <div class="survey-content">
+            <img height="300" src="claudetwo.png">
+        </div>
+
+
+
     </section>
 
     <section class="bottom">
 
         <div class="bottom-content">
-            <table class="table">
+            <table class="table body-font">
                 <thead>
-                  <tr>
-                    <th scope="col">Date Received</th>                   
-                    <th scope="col">Vaccine Name</th>
-                    <th scope="col">Due On</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Due On</th>
+                        <th scope="col">Vaccine Name</th>
+                        <th scope="col">Last Received</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">11/5/24</th>                    
-                    <td>Rabies</td>
-                    <td>11/5/24</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">11/5/24</th>                   
-                    <td>Bordatella</td>
-                    <td>11/5/24</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">11/5/24</th>                   
-                    <td>Distemper</td>
-                    <td>11/5/24</td>
-                  </tr>
+                    <tr>
+                        <th scope="row" id="dueOn1"></th>
+                        <td>Rabies</td>
+                        <td id="lastReceived1"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" id="dueOn2"></th>
+                        <td>FVRCP</td>
+                        <td id="lastReceived2"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" id="dueOn3"></th>
+                        <td>Distemper</td>
+                        <td id="lastReceived3"></td>
+                    </tr>
                 </tbody>
-              </table>
+            </table>
 
-              <a href="http://127.0.0.1:5501/welcome.html" class="back-link">
+            <a href="http://127.0.0.1:5501/welcome.html" class="back-link">
                 <button type="submit" class="btn btn-outline-dark">Back</button>
             </a>
         </div>
 
     </section>
 
+    <script src="functions.js"></script>
+
 </body>
+
 </html>
