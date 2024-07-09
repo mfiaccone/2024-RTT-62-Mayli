@@ -17,14 +17,7 @@
     
     }
 
-.zen-loop-smallest {
-    font-family: "Zen Loop", cursive;
-    font-weight: 570;
-    font-size: 30px;
-    color: black;
-    font-style: normal;
-    margin: 15px;
-    }
+
 
 .body-font {
         font-family: "Dosis", sans-serif;
@@ -68,7 +61,7 @@ body {
 
 .survey-section {
     height: 40vh;
-    background-color: lightgrey;
+    background-color: #c5dbd7;
     display: flex;
     flex-direction: column;
     justify-content: center;

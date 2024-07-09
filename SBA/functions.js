@@ -25,6 +25,7 @@ let totalTreatsDonated = 0;
 
 // table functions
 
+
 function calculateDueDates(petName) {
 
     if (petName === 'kandy') {
@@ -76,6 +77,8 @@ function formatDate(date) {
     let year = date.getFullYear();
     return `${month}/${day}/${year}`;
 }
+
+
 
 function handleDOMContentLoaded() {
     calculateDueDates();
