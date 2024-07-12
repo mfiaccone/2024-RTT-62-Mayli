@@ -80,4 +80,12 @@ public class IndexController {
 
         return response;
     }
+
+    @GetMapping("/homework")
+    public ModelAndView homework(@RequestParam String homework) {
+        
+        ModelAndView response = new ModelAndView("homework");
+
+        return response;
+    }
 }
