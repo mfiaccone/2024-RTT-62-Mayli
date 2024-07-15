@@ -71,19 +71,25 @@ public class IndexController {
     }
 
     @GetMapping("/search")
-    public ModelAndView search() {
+    public ModelAndView search(@RequestParam(required=false) String search) {
         // this page is for another page of the website which is expressed as "/search"
         ModelAndView response = new ModelAndView("search");
 
-        List<Product> products = productDao.findAll();
+        log.debug("The user searched for the terms: " + search);
+
+        // I am going to add the user input back to the model so that we can display the search in the form
+        // (so user can see what they searched for) put this in the jsp input line:  value="${search}"
+        response.addObject("search", search);
+
+        List<Product> products = productDao.findByName(search);
         response.addObject("products", products);
 
         return response;
     }
 
     @GetMapping("/homework")
-    public ModelAndView homework(@RequestParam String homework) {
-        
+    public ModelAndView homework(@RequestParam(required=false) String homework) {
+
         ModelAndView response = new ModelAndView("homework");
 
         return response;
