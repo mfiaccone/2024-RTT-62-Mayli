@@ -32,6 +32,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/homework">Homework</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/employee/create">Create Employee</a>
+                </li>
             </ul>
         </div>
     </div>
