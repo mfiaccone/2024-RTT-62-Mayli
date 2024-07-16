@@ -24,6 +24,7 @@
                             <input type="text" id="emailId" name="email" class="form-control">
                         </div>
                     </div>
+
                     <div class="row align-items-center justify-content-center pb-3">
                         <div class="col-2">
                             <label for="firstNameId" class="col-form-label">First Name</label>
@@ -32,6 +33,7 @@
                             <input type="text" id="firstNameId" name="firstName" class="form-control">
                         </div>
                     </div>
+
                     <div class="row align-items-center justify-content-center pb-3">
                         <div class="col-2">
                             <label for="lastNameId" class="col-form-label">Last Name</label>
@@ -40,6 +42,25 @@
                             <input type="text" id="lastNameId" name="lastName" class="form-control">
                         </div>
                     </div>
+
+                    <div class="row align-items-center justify-content-center pb-3">
+                        <div class="col-2">
+                            <label for="jobTitleId" class="col-form-label">Job Title</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" id="jobTitleId" name="jobTitle" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center justify-content-center pb-3">
+                        <div class="col-2">
+                            <label for="extension" class="col-form-label">Extension</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" id="extension" name="extension" class="form-control">
+                        </div>
+                    </div>
+
                     <div class="row align-items-center justify-content-center pb-3">
                         <div class="col-2">
                             <label for="reportsTo" class="col-form-label">Reports To</label>
@@ -52,6 +73,20 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="row align-items-center justify-content-center pb-3">
+                        <div class="col-2">
+                            <label for="officeId" class="col-form-label">Office</label>
+                        </div>
+                        <div class="col-4">
+                            <select id="officeId" name="officeId" class="form-control">
+                                <c:forEach items="${offices}" var="office">
+                                    <option value="${office.id}">${office.city}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="row justify-content-center ">
                         <div class="col-auto text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>

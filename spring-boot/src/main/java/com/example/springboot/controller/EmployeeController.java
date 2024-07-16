@@ -2,8 +2,11 @@ package com.example.springboot.controller;
 
 import com.example.springboot.database.dao.CustomerDAO;
 import com.example.springboot.database.dao.EmployeeDAO;
+import com.example.springboot.database.dao.OfficeDAO;
 import com.example.springboot.database.entity.Customer;
 import com.example.springboot.database.entity.Employee;
+import com.example.springboot.database.entity.Office;
+import com.example.springboot.database.entity.Product;
 import com.example.springboot.form.CreateEmployeeFormBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class EmployeeController {
 
     @Autowired
     private CustomerDAO customerDao;
+
+    @Autowired
+    private OfficeDAO officeDao;
 
     @GetMapping("/employee")
     public ModelAndView employeeSearchByName(@RequestParam(required = false) String lastname) {
@@ -61,7 +67,12 @@ public class EmployeeController {
         List<Employee> reportsToEmployees = employeeDao.findAll();
         response.addObject("reportsToEmployees", reportsToEmployees);
 
+        List<Office> officeList = officeDao.findAllOrderedByName(); // Fetch offices ordered by name
+        response.addObject("offices", officeList);
+
         return response;
+
+
     }
 
     @GetMapping("/createSubmit") //this is url not the file direction
