@@ -77,7 +77,7 @@ public class EmployeeController {
 
     @GetMapping("/createSubmit") //this is url not the file direction
     public ModelAndView createSubmit(CreateEmployeeFormBean form) {
-        //arguement to the constructor here is teh view now
+        //argument to the constructor here is the view now
         ModelAndView response = new ModelAndView();
 
         Employee employee = new Employee();
@@ -85,9 +85,12 @@ public class EmployeeController {
         employee.setFirstname(form.getFirstName());
         employee.setLastname(form.getLastName());
         employee.setReportsTo(form.getReportsTo());
-        employee.setExtension("x123");
-        employee.setOfficeId(1);
-        employee.setJobTitle("Job Title");
+        employee.setExtension(form.getExtension());
+        employee.setJobTitle(form.getJobTitle());
+//        employee.setOfficeId(form.getOfficeId());  this won't work bc it is set to insertable = false and updatable = false
+
+        Office office = officeDao.findById(form.getOfficeId());
+        employee.setOffice(office);
 
         //when we save to the database it will auto increment to give us a new id
         //the new ID is available in the return from the save method

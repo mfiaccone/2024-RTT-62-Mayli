@@ -20,7 +20,13 @@ import java.util.List;
         @Column(name = "id")
         private Integer id;
 
-        @Column(name = "office_id")
+        @ToString.Exclude
+        @ManyToOne(fetch = FetchType.LAZY, optional =true)
+        @JoinColumn(name = "office_id", nullable = true)
+        private Office office;
+
+        //in essense this field is a read only field and the database will ignore it on update or insert
+        @Column(name = "office_id", insertable=false, updatable=false)
         private Integer officeId;
 
         @Column(name = "lastname")

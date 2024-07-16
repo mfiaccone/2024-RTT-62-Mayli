@@ -45,10 +45,10 @@
 
                     <div class="row align-items-center justify-content-center pb-3">
                         <div class="col-2">
-                            <label for="jobTitleId" class="col-form-label">Job Title</label>
+                            <label for="jobTitle" class="col-form-label">Job Title</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="jobTitleId" name="jobTitle" class="form-control">
+                            <input type="text" id="jobTitle" name="jobTitle" class="form-control">
                         </div>
                     </div>
 
