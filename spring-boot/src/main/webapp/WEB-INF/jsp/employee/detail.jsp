@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td style="font-weight: bolder;">Office ID:</td>
-            <td>${employee.officeId}</td>
+            <td>${employee.office.city}</td> //we can do the .city as well because they are mapped in the DAOs
         </tr>
         <tr>
             <td style="font-weight: bolder;">Full Name:</td>
