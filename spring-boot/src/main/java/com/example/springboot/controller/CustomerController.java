@@ -34,9 +34,6 @@ class CustomerController {
     private EmployeeDAO employeeDAO;
 
     @Autowired
-    private OfficeDAO officeDAO;
-
-    @Autowired
     private OrderDAO orderDAO;
 
     @GetMapping
@@ -69,13 +66,6 @@ class CustomerController {
     @GetMapping("/create")
     public ModelAndView create() {
         ModelAndView response = new ModelAndView("customer/create");
-
-        // this list of employees is used in the Reports To dropdown to list all the employees
-//        List<Customer> salesRepEmployee = customerDAO.findAll();
-//        response.addObject("salesRepEmployee", salesRepEmployee);
-
-//        List<Office> officeList = officeDao.findAllOrderedByName(); // Fetch offices ordered by name
-//        response.addObject("offices", officeList);
 
         // Fetch and sort employees (sales reps) by ID
         List<Employee> salesRepEmployees = employeeDAO.findAll(); // Assuming employeeDAO is your DAO instance
@@ -123,9 +113,6 @@ class CustomerController {
             customer.setCountry(form.getCountry());
             customer.setSalesRepEmployeeId(form.getSalesRepEmployeeId());
 
-
-//         Office office = officeDAO.findById(form.findById());
-            // customer.setOffice(office); // Assuming Customer entity has a setOffice method
 
             // Save the customer to the database
             customer = customerDAO.save(customer);

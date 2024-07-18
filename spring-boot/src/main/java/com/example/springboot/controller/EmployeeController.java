@@ -52,7 +52,7 @@ public class EmployeeController {
 
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam Integer employeeId) {
-        ModelAndView response = new ModelAndView("employee/detail.jsp");
+        ModelAndView response = new ModelAndView("employee/detail");
 
         List<Customer> customers = customerDao.findBySalesRepEmployeeId(employeeId);
         response.addObject("customers", customers);
@@ -76,8 +76,45 @@ public class EmployeeController {
 
         return response;
 
-
     }
+
+    @GetMapping("/edit")
+    public ModelAndView edit(@RequestParam(required=false) Integer employeeId) {
+        //by setting required = false on the incoming parameter we allow null to enter the controller so that spring does not cause an error page
+        // then we check if the input is null before trying to do our query
+
+        // this view is the same for all the methods so far, even though it is named create and we are using it for edit
+        ModelAndView response = new ModelAndView("/employee/create");
+
+        // here again we have some duplicated code that could be refactored into a method
+        // this list of employees is used in the Reports To drop down list
+        List<Employee> reportsToEmployees = employeeDao.findAll();
+        response.addObject("reportsToEmployees", reportsToEmployees);
+
+        List<Office> offices = officeDao.findAll();
+        response.addObject("offices", offices);
+
+        // here i am checking the incoming employeeId to see if it is null or not (otherwise no reason to do below code)
+        if (employeeId != null) {
+            // load the employee from the database and set the form bean with all the employee values
+            // this is because the form bean is on the JSP page, and we need to pre-populate the form with the employee data
+            Employee employee = employeeDao.findById(employeeId);
+            if (employee != null) {
+                CreateEmployeeFormBean form = new CreateEmployeeFormBean();
+                form.setEmployeeId(employee.getId());
+                form.setEmail(employee.getEmail());
+                form.setFirstName(employee.getFirstname());
+                form.setLastName(employee.getLastname());
+                form.setReportsTo(employee.getReportsTo());
+                form.setOfficeId(employee.getOffice().getId());
+
+                response.addObject("form", form);
+
+            }
+        }
+        return response;
+    }
+
 
     @GetMapping("/createSubmit") //this is url not the file direction
     public ModelAndView createSubmit(@Valid CreateEmployeeFormBean form, BindingResult bindingResult) {
@@ -116,7 +153,14 @@ public class EmployeeController {
             // variable name
             log.debug(form.toString());
 
-            Employee employee = new Employee();
+            // first, I am going to take a shot at looking up the record in the database based on the incoming employeeId
+            // this is from the hidden input field and is not something the user actually entered themselves
+            Employee employee = employeeDao.findById(form.getEmployeeId());
+            if ( employee == null) {
+                // this means it was not found in the database so we are going to consider this a create
+                employee = new Employee();
+            }
+
             employee.setEmail(form.getEmail());
             employee.setFirstname(form.getFirstName());
             employee.setLastname(form.getLastName());
@@ -137,7 +181,7 @@ public class EmployeeController {
             //however often times this would redirect to the edit page which we have not created yet
             // after the redirect is actually a URl and not a view name
             // in some ways this is overriding the behavior of the setViewName to use a URL rather than a JSP file location
-            response.setViewName("redirect:/employee/detail.jsp?employeeId=" + employee.getId());
+            response.setViewName("redirect:/employee/detail?employeeId=" + employee.getId());
 
             log.debug(form.toString());
             return response;

@@ -10,6 +10,10 @@ import org.hibernate.validator.constraints.Length;
 @ToString
 public class CreateEmployeeFormBean {
 
+    // when the user exists int he database this value will be populated with the id of the database field
+    // this field is only set when the user called the /employee/edit URL and gives a valid employee id
+    // if this field is null, then it is a create
+    private Integer employeeId;
 
     // these annotations are called JSR-303 validation
     @Length(max=100, message="Email must be less than 100 characters")
