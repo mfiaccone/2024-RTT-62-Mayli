@@ -27,20 +27,32 @@
                 <table class="table">
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Customer Name</th>
                         <th>Contact Name</th>
+                        <th>Phone</th>
+                        <th>Address Line One</th>
+                        <th>Address Line Two</th>
+                        <th>City</th>
                         <th>State</th>
                         <th>Postal Code</th>
                         <th>Country</th>
+                        <th>Sales Rep Employee</th>
 
                     </tr>
                     <tr>
                         <td>${customer.id}</td>
                         <td>${customer.customerName}</td>
                         <td>${customer.contactFirstName} ${customer.contactLastName}</td>
+                        <td>${customer.phone}</td>
+                        <td>${customer.addressLineOne}</td>
+                        <td>${customer.addressLineTwo}</td>
+                        <td>${customer.city}</td>
                         <td>${customer.state}</td>
                         <td>${customer.postalCode}</td>
                         <td>${customer.country}</td>
+                        <td><a href="${pageContext.request.contextPath}/employee/detail?employeeId=${customer.salesRepEmployeeId}">
+                            ${customer.salesRepEmployeeId}
+                        </a></td>
 
                     </tr>
                 </table>

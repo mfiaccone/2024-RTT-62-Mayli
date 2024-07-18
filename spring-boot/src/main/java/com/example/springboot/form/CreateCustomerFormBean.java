@@ -9,6 +9,8 @@ import lombok.*;
 @ToString
 public class CreateCustomerFormBean {
 
+    private Integer customerId;
+
     @NotEmpty(message="Customer Name is required.")
     private String customerName;
 

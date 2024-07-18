@@ -6,7 +6,12 @@
 <section style="background-color:gray">
     <div class="container">
         <div class="row pt-5 pb-5">
-            <h1 class="text-center">Create Customer</h1>
+            <c:if test="${empty form.customerId}">
+                <h1 class="text-center">Create Customer</h1>
+            </c:if>
+            <c:if test="${not empty form.customerId}">
+                <h1 class="text-center">Edit Customer</h1>
+            </c:if>
         </div>
     </div>
 </section>
@@ -16,6 +21,7 @@
         <div class="row pt-5 ">
             <div class="col-12">
                 <form action="/customer/createSubmit" >
+                    <input type="hidden" name="customerId" value="${form.customerId}">
 
                     <!-- Customer Name Input Field -->
                     <div class="row align-items-center justify-content-center pb-3">

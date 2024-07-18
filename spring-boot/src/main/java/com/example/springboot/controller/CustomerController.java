@@ -6,8 +6,10 @@ import com.example.springboot.database.dao.OfficeDAO;
 import com.example.springboot.database.dao.OrderDAO;
 import com.example.springboot.database.entity.Customer;
 import com.example.springboot.database.entity.Employee;
+import com.example.springboot.database.entity.Office;
 import com.example.springboot.database.entity.Order;
 import com.example.springboot.form.CreateCustomerFormBean;
+import com.example.springboot.form.CreateEmployeeFormBean;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +73,49 @@ class CustomerController {
         List<Employee> salesRepEmployees = employeeDAO.findAll(); // Assuming employeeDAO is your DAO instance
         response.addObject("salesRepEmployees", salesRepEmployees);
 
-
-
         return response;
 
+    }
 
+    @GetMapping("/edit")
+    public ModelAndView edit(@RequestParam(required=false) Integer customerId) {
+        //by setting required = false on the incoming parameter we allow null to enter the controller so that spring does not cause an error page
+        // then we check if the input is null before trying to do our query
+
+        // this view is the same for all the methods so far, even though it is named create and we are using it for edit
+        ModelAndView response = new ModelAndView("/customer/create");
+
+        // here again we have some duplicated code that could be refactored into a method
+        // this list of employees is used in the Reports To drop down list
+        List<Employee> reportsToEmployees = employeeDAO.findAll();
+        response.addObject("reportsToEmployees", reportsToEmployees);
+
+
+        // here i am checking the incoming employeeId to see if it is null or not (otherwise no reason to do below code)
+        if (customerId != null) {
+            // load the employee from the database and set the form bean with all the employee values
+            // this is because the form bean is on the JSP page, and we need to pre-populate the form with the employee data
+            Customer customer = customerDAO.findCustomerById(customerId);
+            if (customer != null) {
+                CreateCustomerFormBean form = new CreateCustomerFormBean();
+
+                form.setCustomerId(customer.getId());
+                form.setCustomerName(customer.getCustomerName());
+                form.setContactLastName(customer.getContactLastName());
+                form.setContactFirstName(customer.getContactFirstName());
+                form.setPhone(customer.getPhone());
+                form.setAddressLineOne(customer.getAddressLineOne());
+                form.setAddressLineTwo(customer.getAddressLineTwo());
+                form.setCity(customer.getCity());
+                form.setState(customer.getState());
+                form.setPostalCode(customer.getPostalCode());
+                form.setCountry(customer.getCountry());
+
+                response.addObject("form", form);
+
+            }
+        }
+        return response;
     }
 
     @GetMapping("/createSubmit") //this is url not the file direction
