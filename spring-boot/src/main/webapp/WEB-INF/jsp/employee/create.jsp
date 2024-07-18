@@ -45,7 +45,7 @@
                             <label for="firstNameId" class="col-form-label">First Name</label>
                         </div>
                         <div class="col-4">
-                            <input type="text" id="firstNameId" name="firstName" class="form-control value="${form.firstName}">
+                            <input type="text" id="firstNameId" name="firstName" class="form-control <c:if test="${bindingResult.hasFieldErrors('firstName')}">is-invalid</c:if>" value="${form.firstName}">
                         </div>
                     </div>
                     <c:if test="${bindingResult.hasFieldErrors('firstName')}">
@@ -66,7 +66,7 @@
                             <label for="lastNameId" class="col-form-label">Last Name</label>
                         </div>
                         <div class="col-4">
-                            <input type="text" id="lastNameId" name="lastName" class="form-control value="${form.lastName}">
+                            <input type="text" id="lastNameId" name="lastName" class="form-control <c:if test="${bindingResult.hasFieldErrors('lastName')}">is-invalid</c:if>" value="${form.lastName}">
                         </div>
                     </div>
                     <c:if test="${bindingResult.hasFieldErrors('lastName')}">
@@ -87,7 +87,7 @@
                             <label for="jobTitle" class="col-form-label">Job Title</label>
                         </div>
                         <div class="col-4">
-                            <input type="text" id="jobTitle" name="jobTitle" class="form-control value="${form.jobTitle}">
+                            <input type="text" id="jobTitle" name="jobTitle" class="form-control <c:if test="${bindingResult.hasFieldErrors('jobTitle')}">is-invalid</c:if>" value="${form.jobTitle}">
                         </div>
                     </div>
 
@@ -101,12 +101,14 @@
                         </div>
                     </div>
 
+                    <!-- Reports To Input Field -->
+
                     <div class="row align-items-center justify-content-center pb-3">
                         <div class="col-2">
                             <label for="reportsTo" class="col-form-label">Reports To</label>
                         </div>
                         <div class="col-4">
-                            <select id="reportsTo" name="reportsTo" class="form-control">
+                            <select id="reportsTo" name="reportsTo" class="form-control <c:if test="${bindingResult.hasFieldErrors('reportsTo')}">is-invalid</c:if>">
                                 <c:forEach items="${reportsToEmployees}" var="employee">
                                     <option
                                             value="${employee.id}"

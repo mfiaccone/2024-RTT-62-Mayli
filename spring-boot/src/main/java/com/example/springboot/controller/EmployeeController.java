@@ -36,7 +36,7 @@ public class EmployeeController {
     @Autowired
     private OfficeDAO officeDao;
 
-    @GetMapping("/employee")
+    @GetMapping
     public ModelAndView employeeSearchByName(@RequestParam(required = false) String lastname) {
 
         ModelAndView response = new ModelAndView("employee");
@@ -52,7 +52,7 @@ public class EmployeeController {
 
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam Integer employeeId) {
-        ModelAndView response = new ModelAndView("employee/detail");
+        ModelAndView response = new ModelAndView("employee/detail.jsp");
 
         List<Customer> customers = customerDao.findBySalesRepEmployeeId(employeeId);
         response.addObject("customers", customers);
@@ -133,11 +133,11 @@ public class EmployeeController {
             // basically returns the same object... after it's been inserted into the database
             employee = employeeDao.save(employee);
 
-            //redirecting to the employee detail page
+            //redirecting to the employee detail.jsp page
             //however often times this would redirect to the edit page which we have not created yet
             // after the redirect is actually a URl and not a view name
             // in some ways this is overriding the behavior of the setViewName to use a URL rather than a JSP file location
-            response.setViewName("redirect:/employee/detail?employeeId=" + employee.getId());
+            response.setViewName("redirect:/employee/detail.jsp?employeeId=" + employee.getId());
 
             log.debug(form.toString());
             return response;

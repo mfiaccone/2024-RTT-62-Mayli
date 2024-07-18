@@ -7,7 +7,7 @@
 <section>
     <div class="row pt-5">
         <div class="col-12">
-            <h2 class="text-center">Employee ${employee.firstname} ${employee.lastname}</h2>
+            <h2 class="text-center">Employee: ${employee.firstname} ${employee.lastname}</h2>
         </div>
     </div>
 
@@ -36,8 +36,8 @@
                     <c:forEach items="${customers}" var="customer">
                         <tr>
                             <td>${customer.id}</td>
-                            <td>${customer.customerName}</td>
-                            <td>${customer.contactFirstname} ${customer.contactLastname}</td>
+                            <td><a href="/customer/detail?customerId=${customer.id}">${customer.customerName}</a></td>
+                            <td>${customer.contactFirstName} ${customer.contactLastName}</td>
                             <td>${customer.state}</td>
                             <td>${customer.postalCode}</td>
                             <td>${customer.country}</td>
@@ -48,6 +48,7 @@
         </div>
     </div>
 
+    <div class="row justify-content-center">
     <table class="table table-success table-striped table-bordered table-responsive" style="width: 750pt">
         <tr>
             <td style="font-weight: bolder;">Employee ID:</td>
@@ -55,7 +56,7 @@
         </tr>
         <tr>
             <td style="font-weight: bolder;">Office ID:</td>
-            <td>${employee.office.city}</td> //we can do the .city as well because they are mapped in the DAOs
+            <td>${employee.office.city}</td> <!-- we can do the city as well because it's in the DAOs -->
         </tr>
         <tr>
             <td style="font-weight: bolder;">Full Name:</td>
@@ -83,9 +84,8 @@
                 class="clickable-row">Customers
             </td>
         </tr>
-
-
     </table>
+    </div>
 </section>
 
 

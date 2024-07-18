@@ -5,7 +5,7 @@
 <section style="background-color:darkgray">
     <div class="container">
         <div class="row pt-5 pb-5">
-            <h1 class="text-center">Search Page</h1>
+            <h1 class="text-center">Product Search Page</h1>
         </div>
     </div>
 </section>
@@ -48,7 +48,7 @@
                     <tr>
                         <td>${product.id}</td>
                         <td>${product.productCode}</td>
-                        <td>${product.productName}</td>
+                        <td><a href="/product/detail?productId=${product.id}">${product.productName}</a></td>
                         <td>${product.productDescription}</td>
                     </tr>
                 </c:forEach>

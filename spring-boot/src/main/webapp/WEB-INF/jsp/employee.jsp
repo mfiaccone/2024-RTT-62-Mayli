@@ -54,6 +54,7 @@
                         <td>${employee.firstname}</td>
                         <td>${employee.email}</td>
                         <td>${employee.jobTitle}</td>
+                        <td><a href="${pageContext.request.contextPath}/employee/detail?employeeId=${employee.id}">View Details</a></td>
                     </tr>
                 </c:forEach>
             </table>

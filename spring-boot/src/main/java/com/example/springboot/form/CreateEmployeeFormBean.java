@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 @ToString
 public class CreateEmployeeFormBean {
 
-    
+
     // these annotations are called JSR-303 validation
     @Length(max=100, message="Email must be less than 100 characters")
     @NotEmpty(message="Email is required.")

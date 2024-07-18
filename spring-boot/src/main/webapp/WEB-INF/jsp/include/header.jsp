@@ -26,14 +26,23 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/page-url">2nd Page</a>
-                <li class="nav-item">
-                    <a class="nav-link" href="/search">Search</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/homework">Homework</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/search">Product Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/employee">Employee Search</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/employee/create">Create Employee</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/customer/create">Create Customer</a>
                 </li>
             </ul>
         </div>
