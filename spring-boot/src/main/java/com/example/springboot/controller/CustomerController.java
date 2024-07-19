@@ -140,7 +140,15 @@ class CustomerController {
 
             return response;
         } else {
-            Customer customer = new Customer();
+
+            // first, I am going to take a shot at looking up the record in the database based on the incoming employeeId
+            // this is from the hidden input field and is not something the user actually entered themselves
+            Customer customer = customerDAO.findCustomerById(form.getCustomerId());
+            if ( customer == null) {
+                // this means it was not found in the database so we are going to consider this a create
+                customer = new Customer();
+            }
+
             customer.setCustomerName(form.getCustomerName());
             customer.setContactLastName(form.getContactLastName());
             customer.setContactFirstName(form.getContactFirstName());
