@@ -65,7 +65,7 @@ public class EmployeeController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        ModelAndView response = new ModelAndView("/employee/create");
+        ModelAndView response = new ModelAndView("/employee/create.jsp");
 
         // this list of employees is used in the Reports To dropdown to list all the employees
         List<Employee> reportsToEmployees = employeeDao.findAll();
@@ -83,8 +83,8 @@ public class EmployeeController {
         //by setting required = false on the incoming parameter we allow null to enter the controller so that spring does not cause an error page
         // then we check if the input is null before trying to do our query
 
-        // this view is the same for all the methods so far, even though it is named create and we are using it for edit
-        ModelAndView response = new ModelAndView("/employee/create");
+        // this view is the same for all the methods so far, even though it is named create.jsp and we are using it for edit
+        ModelAndView response = new ModelAndView("/employee/create.jsp");
 
         // here again we have some duplicated code that could be refactored into a method
         // this list of employees is used in the Reports To drop down list
@@ -140,7 +140,7 @@ public class EmployeeController {
             response.addObject("offices", officeList);
 
             //i'm going to set the view name to be
-            response.setViewName("employee/create");
+            response.setViewName("employee/create.jsp");
 
             // i'm going to add the form to the model so that we can display the user entered data in the form
             response.addObject("form", form);
@@ -155,9 +155,10 @@ public class EmployeeController {
 
             // first, I am going to take a shot at looking up the record in the database based on the incoming employeeId
             // this is from the hidden input field and is not something the user actually entered themselves
+            //these lines of code are what make it either a create.jsp or an edit
             Employee employee = employeeDao.findById(form.getEmployeeId());
             if ( employee == null) {
-                // this means it was not found in the database so we are going to consider this a create
+                // this means it was not found in the database so we are going to consider this a create.jsp
                 employee = new Employee();
             }
 

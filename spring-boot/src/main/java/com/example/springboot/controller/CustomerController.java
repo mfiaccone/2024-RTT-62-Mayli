@@ -67,7 +67,7 @@ class CustomerController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        ModelAndView response = new ModelAndView("customer/create");
+        ModelAndView response = new ModelAndView("customer/create.jsp");
 
         // Fetch and sort employees (sales reps) by ID
         List<Employee> salesRepEmployees = employeeDAO.findAll(); // Assuming employeeDAO is your DAO instance
@@ -82,8 +82,8 @@ class CustomerController {
         //by setting required = false on the incoming parameter we allow null to enter the controller so that spring does not cause an error page
         // then we check if the input is null before trying to do our query
 
-        // this view is the same for all the methods so far, even though it is named create and we are using it for edit
-        ModelAndView response = new ModelAndView("/customer/create");
+        // this view is the same for all the methods so far, even though it is named create.jsp and we are using it for edit
+        ModelAndView response = new ModelAndView("/customer/create.jsp");
 
         // here again we have some duplicated code that could be refactored into a method
         // this list of employees is used in the Reports To drop down list
@@ -133,7 +133,7 @@ class CustomerController {
             List<Employee> salesRepEmployees = employeeDAO.findAll();
             response.addObject("salesRepEmployees", salesRepEmployees);
 
-            response.setViewName("customer/create");
+            response.setViewName("customer/create.jsp");
 
             response.addObject("form", form);
 
@@ -145,7 +145,7 @@ class CustomerController {
             // this is from the hidden input field and is not something the user actually entered themselves
             Customer customer = customerDAO.findCustomerById(form.getCustomerId());
             if ( customer == null) {
-                // this means it was not found in the database so we are going to consider this a create
+                // this means it was not found in the database so we are going to consider this a create.jsp
                 customer = new Customer();
             }
 

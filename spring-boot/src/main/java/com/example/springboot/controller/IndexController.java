@@ -81,7 +81,7 @@ public class IndexController {
         // (so user can see what they searched for) put this in the jsp input line:  value="${search}"
         response.addObject("search", search);
 
-        List<Product> products = productDao.findByName(search);
+        List<Product> products = productDao.findByNameorCode(search);
         response.addObject("products", products);
 
         return response;

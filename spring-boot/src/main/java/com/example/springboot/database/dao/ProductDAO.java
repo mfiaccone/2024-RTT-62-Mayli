@@ -12,6 +12,6 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
     Product findById(Integer id);
 
     // this is a JPA query just like we did in the hiberate module
-    @Query("select p from Product p where p.productName like concat('%', :name, '%')")
-    List<Product> findByName(String name);
+    @Query("select p from Product p where p.productName like concat('%', :name, '%') or p.productCode like concat ('%', :name, '%')")
+    List<Product> findByNameorCode(String name);
 }

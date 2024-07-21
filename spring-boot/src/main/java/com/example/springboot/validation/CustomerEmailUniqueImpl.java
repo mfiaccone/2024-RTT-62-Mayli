@@ -3,16 +3,15 @@ package com.example.springboot.validation;
 import com.example.springboot.database.dao.*;
 import com.example.springboot.database.entity.*;
 import jakarta.validation.*;
-import lombok.extern.slf4j.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.util.*;
 
-public class EmployeeEmailUniqueImpl implements ConstraintValidator<EmployeeEmailUnique, String> {
+public class CustomerEmailUniqueImpl implements ConstraintValidator<CustomerEmailUnique, String> {
     public static final Logger LOG = LoggerFactory.getLogger(EmployeeEmailUniqueImpl.class);
 
     @Autowired
-    private EmployeeDAO employeeDao;
+    private CustomerDAO customerDao;
 
 
     @Override
@@ -25,10 +24,10 @@ public class EmployeeEmailUniqueImpl implements ConstraintValidator<EmployeeEmai
         }
 
         //UserMSQL user = userService.findByCustomerName(value);
-        Employee employee = employeeDao.findByEmailIgnoreCase(value);
+        Customer customer = customerDao.findByCustomerName(value);
 
         // this validation returns true when the email is NOT in the database
-        return (employee == null);
+        return (customer == null);
     }
 
 
