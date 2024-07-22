@@ -2,7 +2,7 @@
 
 <jsp:include page="../include/header.jsp" />
 
-<h1 class="page-title">This is an product detail page</h1>
+<h1 class="page-title">This is a product detail page</h1>
 
 <section>
     <div class="row pt-5">

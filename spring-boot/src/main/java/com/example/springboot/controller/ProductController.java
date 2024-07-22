@@ -2,6 +2,7 @@ package com.example.springboot.controller;
 
 import com.example.springboot.database.dao.ProductDAO;
 import com.example.springboot.database.entity.Product;
+import com.example.springboot.form.CreateProductFormBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/product")
@@ -25,5 +28,23 @@ public class ProductController {
         modelAndView.addObject("product", product);
 
         return modelAndView;
+    }
+
+
+    @GetMapping("/create")
+    public ModelAndView create() {
+        ModelAndView response = new ModelAndView("/product/create");
+
+        List<Product> productVendorList = productDAO.findAll();
+        response.addObject("productVendorList", productVendorList);
+
+        return response;
+    }
+
+    @GetMapping("/createSubmit")
+    public ModelAndView createSubmit(CreateProductFormBean form) {
+
+        ModelAndView response = new ModelAndView("/product/createSubmit");
+         return response;
     }
 }

@@ -65,7 +65,7 @@ public class EmployeeController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        ModelAndView response = new ModelAndView("/employee/create.jsp");
+        ModelAndView response = new ModelAndView("/employee/create");
 
         // this list of employees is used in the Reports To dropdown to list all the employees
         List<Employee> reportsToEmployees = employeeDao.findAll();
@@ -84,7 +84,7 @@ public class EmployeeController {
         // then we check if the input is null before trying to do our query
 
         // this view is the same for all the methods so far, even though it is named create.jsp and we are using it for edit
-        ModelAndView response = new ModelAndView("/employee/create.jsp");
+        ModelAndView response = new ModelAndView("/employee/create");
 
         // here again we have some duplicated code that could be refactored into a method
         // this list of employees is used in the Reports To drop down list

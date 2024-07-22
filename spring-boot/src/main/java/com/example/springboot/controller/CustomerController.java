@@ -67,7 +67,7 @@ class CustomerController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        ModelAndView response = new ModelAndView("customer/create.jsp");
+        ModelAndView response = new ModelAndView("customer/create");
 
         // Fetch and sort employees (sales reps) by ID
         List<Employee> salesRepEmployees = employeeDAO.findAll(); // Assuming employeeDAO is your DAO instance
@@ -83,7 +83,7 @@ class CustomerController {
         // then we check if the input is null before trying to do our query
 
         // this view is the same for all the methods so far, even though it is named create.jsp and we are using it for edit
-        ModelAndView response = new ModelAndView("/customer/create.jsp");
+        ModelAndView response = new ModelAndView("/customer/create");
 
         // here again we have some duplicated code that could be refactored into a method
         // this list of employees is used in the Reports To drop down list
@@ -133,7 +133,7 @@ class CustomerController {
             List<Employee> salesRepEmployees = employeeDAO.findAll();
             response.addObject("salesRepEmployees", salesRepEmployees);
 
-            response.setViewName("customer/create.jsp");
+            response.setViewName("customer/create");
 
             response.addObject("form", form);
 

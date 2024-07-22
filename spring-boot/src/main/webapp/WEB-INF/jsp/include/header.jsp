@@ -44,6 +44,9 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/customer/create">Create Customer</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/product/create">Create Product</a>
+                </li>
             </ul>
         </div>
     </div>
