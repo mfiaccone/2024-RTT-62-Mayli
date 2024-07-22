@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+import java.util.Map;
+
 @Slf4j
 @Controller
 @RequestMapping("/order")
@@ -21,11 +24,17 @@ public class OrderController {
 
     @GetMapping("/detail")
     public ModelAndView orderDetail(@RequestParam Integer orderId) {
-        ModelAndView modelAndView = new ModelAndView("order/detail");
+        ModelAndView response = new ModelAndView("order/detail");
 
         Order order = orderDAO.findById(orderId).orElse(null);
-        modelAndView.addObject("order", order);
+        response.addObject("order", order);
 
-        return modelAndView;
+        List<Map<String,Object>> orderDetails = orderDAO.getOrderDetails(orderId);
+        response.addObject("orderDetails", orderDetails);
+
+
+        return response;
     }
+
+
 }
