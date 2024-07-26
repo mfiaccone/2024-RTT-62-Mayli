@@ -15,8 +15,8 @@
     <div class="container">
         <div class="row pt-5 ">
             <div class="col-12">
-                <form action="/create-account" method="post">
-                    <input type="hidden" name="employeeId" value="${form.employeeId}">
+                <form action="/account/create-account" method="post">
+
 
                     <!-- Email Input Field -->
                     <div class="row align-items-center justify-content-center pb-3">

@@ -3,6 +3,7 @@ package com.example.springboot.controller;
 import com.example.springboot.database.dao.*;
 import com.example.springboot.database.entity.*;
 import com.example.springboot.form.*;
+import com.example.springboot.service.UserService;
 import jakarta.validation.*;
 import lombok.extern.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
@@ -15,22 +16,26 @@ import java.util.*;
 
 @Slf4j
 @Controller
+@RequestMapping("/account")
 public class LoginController {
 
     @Autowired
     private UserDAO userDao;
 
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/create-account")
     public ModelAndView createAccount() {
-        ModelAndView response = new ModelAndView("auth/create-account");
+        ModelAndView response = new ModelAndView("/auth/create-account");
 
         return response;
     }
 
     @PostMapping("/create-account")
     public ModelAndView createAccountSubmit(@Valid CreateAccountFormBean form, BindingResult bindingResult) {
-        ModelAndView response = new ModelAndView("auth/create-account");
+        ModelAndView response = new ModelAndView("/auth/create-account");
 
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
@@ -41,14 +46,8 @@ public class LoginController {
             response.addObject("form", form);
         } else {
             // there were no errors so we can create the new user in the database
-            User user = new User();
+            userService.createUser(form);
 
-            user.setEmail(form.getEmail());
-            user.setPassword(form.getPassword());
-            user.setCreateDate(new Date());
-
-            // save the user to the database
-            userDao.save(user);
         }
 
         return response;

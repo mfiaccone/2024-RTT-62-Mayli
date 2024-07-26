@@ -15,10 +15,5 @@ public class CreateAccountFormBean {
 
     @NotEmpty
     private String password;
-//    private Date createDate;
-//    private Integer userId;
-//    private String roleName;
-
-
 
 }
