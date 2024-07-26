@@ -2,9 +2,8 @@ package com.example.springboot.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
-import java.util.Date;
+import java.util.*;
 
 @Setter
 @Getter
@@ -15,7 +14,6 @@ import java.util.Date;
 @Table(name = "users")
 public class User {
 
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

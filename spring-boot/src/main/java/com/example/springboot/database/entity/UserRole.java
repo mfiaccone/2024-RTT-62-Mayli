@@ -3,7 +3,7 @@ package com.example.springboot.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.util.*;
 
 @Setter
 @Getter
