@@ -84,8 +84,21 @@
                 class="clickable-row">Customers
             </td>
         </tr>
+        <tr>
+            <td>Image</td>
+            <td><img src="${employee.profileImageUrl}"/></td>
+        </tr>
     </table>
     </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <a href="/employee/edit?employeeId=${employee.id}">Edit</a>
+            <br/>
+            <a href="/file-upload?employeeId=${employee.id}">Upload Image</a>
+        </div>
+    </div>
+
 </section>
 
 

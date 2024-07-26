@@ -8,6 +8,8 @@ import com.example.springboot.database.entity.Employee;
 import com.example.springboot.database.entity.Office;
 import com.example.springboot.database.entity.Product;
 import com.example.springboot.form.CreateEmployeeFormBean;
+import com.example.springboot.service.EmployeeService;
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -27,6 +27,18 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
 
+    // in phase 1 of component scan the constructor is called to create the new object
+    // however the autowired fields are not set yet
+    // in phase 2 the autowired fields are set
+    // in phase 3 the @PostConstructor is called
+    // constructors are no loner used very much in spring because of this
+
+    @PostConstruct
+    public void init() {
+        // this is executed in phase 3 after all the autowired fields are set
+        // this takes the place of a constructor for initialization code
+    }
+
     @Autowired
     private EmployeeDAO employeeDao;
 
@@ -35,6 +47,9 @@ public class EmployeeController {
 
     @Autowired
     private OfficeDAO officeDao;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping
     public ModelAndView employeeSearchByName(@RequestParam(required = false) String lastname) {
@@ -60,8 +75,21 @@ public class EmployeeController {
         Employee employee = employeeDao.findById(employeeId);
         response.addObject("employee", employee);
 
+        loadDropdowns(response);
+
         return response;
     }
+
+    private void loadDropdowns(ModelAndView response) {
+        List<Employee> reportsToEmployees = employeeDao.findAll();
+        response.addObject("reportsToEmployees", reportsToEmployees);
+
+        // add your office query to get all of the offices and add it to the model
+        List<Office> offices = officeDao.findAll();
+        response.addObject("offices", offices);
+
+    }
+
 
     @GetMapping("/create")
     public ModelAndView create() {
@@ -116,10 +144,23 @@ public class EmployeeController {
     }
 
 
-    @GetMapping("/createSubmit") //this is url not the file direction
+    //you can use one or the other of the @PostMapping or @RequestMapping but not both
+    @PostMapping("/createSubmit") //this is url not the file direction
     public ModelAndView createSubmit(@Valid CreateEmployeeFormBean form, BindingResult bindingResult) {
         //argument to the constructor here is the view now
         ModelAndView response = new ModelAndView();
+
+        // we need to validate that the email does not exist in the database, however we only want to check if this is a create
+        if (form.getEmployeeId() == null ) {
+            Employee e = employeeDao.findByEmailIgnoreCase(form.getEmail());
+            // if the e is not null then it was found in the database which means the email is already in use
+            if ( e!= null ) {
+                // this means the email already exists in the database
+                bindingResult.rejectValue("email", "email", "This email is already in use. Manual Check");
+            }
+        }
+
+
 
         // arguement to the constructor here is the view name - the view name can be a JSP location or a redirect URL
         if (bindingResult.hasErrors()) {
@@ -140,7 +181,7 @@ public class EmployeeController {
             response.addObject("offices", officeList);
 
             //i'm going to set the view name to be
-            response.setViewName("employee/create.jsp");
+            response.setViewName("employee/create");
 
             // i'm going to add the form to the model so that we can display the user entered data in the form
             response.addObject("form", form);
@@ -149,34 +190,8 @@ public class EmployeeController {
 
         } else {
 
-            // log out the incoming variables that are in the CreateEmployeeFormBean
-            // variable name
-            log.debug(form.toString());
-
-            // first, I am going to take a shot at looking up the record in the database based on the incoming employeeId
-            // this is from the hidden input field and is not something the user actually entered themselves
-            //these lines of code are what make it either a create.jsp or an edit
-            Employee employee = employeeDao.findById(form.getEmployeeId());
-            if ( employee == null) {
-                // this means it was not found in the database so we are going to consider this a create.jsp
-                employee = new Employee();
-            }
-
-            employee.setEmail(form.getEmail());
-            employee.setFirstname(form.getFirstName());
-            employee.setLastname(form.getLastName());
-            employee.setReportsTo(form.getReportsTo());
-            employee.setExtension(form.getExtension());
-            employee.setJobTitle(form.getJobTitle());
-//        employee.setOfficeId(form.getOfficeId());  this won't work bc it is set to insertable = false and updatable = false
-
-            Office office = officeDao.findById(form.getOfficeId());
-            employee.setOffice(office);
-
-            //when we save to the database it will auto increment to give us a new id
-            //the new ID is available in the return from the save method
-            // basically returns the same object... after it's been inserted into the database
-            employee = employeeDao.save(employee);
+            //call the employee service to create the employee
+            Employee employee = employeeService.createEmployee(form);
 
             //redirecting to the employee detail.jsp page
             //however often times this would redirect to the edit page which we have not created yet
@@ -184,7 +199,9 @@ public class EmployeeController {
             // in some ways this is overriding the behavior of the setViewName to use a URL rather than a JSP file location
             response.setViewName("redirect:/employee/detail?employeeId=" + employee.getId());
 
-            log.debug(form.toString());
+
+
+
             return response;
         }
 

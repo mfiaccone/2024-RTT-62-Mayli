@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.database.dao.ProductDAO;
+import com.example.springboot.database.entity.Office;
 import com.example.springboot.database.entity.Product;
 import com.example.springboot.form.CreateProductFormBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,24 @@ public class ProductController {
     public ModelAndView createSubmit(CreateProductFormBean form) {
 
         ModelAndView response = new ModelAndView("/product/createSubmit");
+
+        Product product = new Product();
+        product.setProductName(form.getProductName());
+        product.setProductCode(form.getProductCode());
+        product.setProductLineId(form.getProductLineId());
+        product.setProductScale(form.getProductScale());
+        product.setProductVendor(form.getProductVendor());
+        product.setProductDescription(form.getProductDescription());
+        product.setQuantityInStock(form.getQuantityInStock());
+        product.setBuyPrice(form.getBuyPrice());
+        product.setMsrp(form.getMsrp());
+
+
+
+
+
+        product = productDAO.save(product);
+
          return response;
     }
 }

@@ -57,9 +57,9 @@
                         <div class="col-4">
                             <input type="text"
                                    id="productLineId"
-                                   name="productLine"
-                                   class="form-control <c:if test="${bindingResult.hasFieldErrors('productLine')}">is-invalid</c:if>"
-                                   value="${form.productLine}">
+                                   name="productLineId"
+                                   class="form-control <c:if test="${bindingResult.hasFieldErrors('productLineId')}">is-invalid</c:if>"
+                                   value="${form.productLineId}">
                         </div>
                     </div>
 
@@ -85,12 +85,12 @@
                         <div class="col-4">
                             <select
                                     id="productVendorId"
-                                    name="productVendorList"
+                                    name="productVendor"
                                     class="form-control <c:if test="${bindingResult.hasFieldErrors('productVendor')}">is-invalid</c:if>"
-                            <c:forEach items="${productVendorList}" var="product">
+                            <c:forEach items="${productVendorList}" var="vendor">
                                 <option
-                                        value="${form.productVendor}"
-                                        <c:if test="${product.id == form.productVendor}">Selected</c:if>
+                                        value="${product.productVendor}"
+                                        <c:if test="${vendor.productVendor == form.productVendor}">Selected</c:if>
                                 >
                                         ${product.productVendor}
                                 </option>
@@ -135,7 +135,7 @@
                         <div class="col-4">
                             <input type="text"
                                    id="buyPriceId"
-                                   name="quantityInStock"
+                                   name="buyPrice"
                                    class="form-control <c:if test="${bindingResult.hasFieldErrors('buyPrice')}">is-invalid</c:if>"
                                    value="${form.buyPrice}">
                         </div>

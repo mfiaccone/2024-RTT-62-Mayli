@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row pt-5 ">
             <div class="col-12">
-                <form action="/employee/createSubmit">
+                <form action="/employee/createSubmit" method="post">
                     <input type="hidden" name="employeeId" value="${form.employeeId}">
 
                     <!-- Email Input Field -->
