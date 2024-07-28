@@ -28,14 +28,23 @@ public class LoginController {
 
     @GetMapping("/create-account")
     public ModelAndView createAccount() {
-        ModelAndView response = new ModelAndView("/auth/create-account");
+        ModelAndView response = new ModelAndView("auth/create-account");
 
         return response;
     }
 
     @PostMapping("/create-account")
     public ModelAndView createAccountSubmit(@Valid CreateAccountFormBean form, BindingResult bindingResult) {
-        ModelAndView response = new ModelAndView("/auth/create-account");
+        ModelAndView response = new ModelAndView("auth/create-account");
+
+        if (form.getId() == null ) {
+            User u = userDao.findByEmailIgnoreCase(form.getEmail());
+            // if the e is not null then it was found in the database which means the email is already in use
+            if ( u!= null ) {
+                // this means the email already exists in the database
+                bindingResult.rejectValue("email", "email", "This email is already in use. Manual Check");
+            }
+        }
 
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {

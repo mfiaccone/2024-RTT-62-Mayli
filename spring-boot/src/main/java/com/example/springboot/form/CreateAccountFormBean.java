@@ -16,4 +16,6 @@ public class CreateAccountFormBean {
     @NotEmpty
     private String password;
 
+    private Integer id;
+
 }
