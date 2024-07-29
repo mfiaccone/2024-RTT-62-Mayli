@@ -23,7 +23,7 @@ public class ProductController {
 
     @GetMapping("/detail")
     public ModelAndView productDetail(@RequestParam Integer productId) {
-        ModelAndView modelAndView = new ModelAndView("/product/detail");
+        ModelAndView modelAndView = new ModelAndView("product/detail");
 
         Product product = productDAO.findById(productId);
         modelAndView.addObject("product", product);
@@ -34,7 +34,7 @@ public class ProductController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        ModelAndView response = new ModelAndView("/product/create");
+        ModelAndView response = new ModelAndView("product/create");
 
         List<Product> productVendorList = productDAO.findAll();
         response.addObject("productVendorList", productVendorList);

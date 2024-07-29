@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row pt-5">
             <div class="col-12">
-                <form action="/product/createSubmit">
+                <form action="product/createSubmit">
 
                     <!-- Product Name Input Field -->
                     <div class="row align-items-center justify-content-center pb-3">

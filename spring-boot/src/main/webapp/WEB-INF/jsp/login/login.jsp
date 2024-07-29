@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="include/header.jsp" />
+<jsp:include page="../include/header.jsp" />
 
 <!-- a page header -->
 <section style="background-color:gray">
@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row pt-5 ">
             <div class="col-12">
-                <form action="/account/create-account" method="post">
+                <form action="/account/loginProcessingURL" method="post">
 
 
                     <!-- Email Input Field -->
@@ -26,7 +26,7 @@
                         <div class="col-4">
                             <input type="text"
                                    id="emailId"
-                                   name="email"
+                                   name="username"
                                    class="form-control <c:if test="${bindingResult.hasFieldErrors('email')}">is-invalid</c:if>"
                                    value="${form.email}">
                         </div>
@@ -79,4 +79,4 @@
 
 
 
-<jsp:include page="include/footer.jsp" />
+<jsp:include page="../include/footer.jsp" />
