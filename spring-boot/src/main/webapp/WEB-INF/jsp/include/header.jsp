@@ -56,6 +56,10 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/file-upload">File Upload</a>
                 </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/login/logout">Log Out</a>
+                </li>
 
             </ul>
         </div>

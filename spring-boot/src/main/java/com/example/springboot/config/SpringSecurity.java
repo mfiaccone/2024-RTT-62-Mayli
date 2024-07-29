@@ -27,7 +27,7 @@ public class SpringSecurity {
         http.authorizeRequests()
                 .requestMatchers(
                         new AntPathRequestMatcher("/admin/**"),
-                        new AntPathRequestMatcher("/user/**")).authenticated()
+                        new AntPathRequestMatcher("/employee/**")).authenticated()
                 .anyRequest().permitAll();
 
         // the loginPage parameter is the actual URL of the login page
@@ -35,20 +35,21 @@ public class SpringSecurity {
         http.formLogin(formLogin -> formLogin
                 // this is a controller method URL for displaying the login page (this can be any url but has to match JSP form action)
                 .loginPage("/account/loginPageUrl")
+
                 // this Url is part of spring security and we do not need to implement it in our controller
                 // we just need to make the form action submit to this URL
                 .loginProcessingUrl("/account/loginProcessingURL"));
-
                 // so 3 things need to be done on the login.jsp
                 // 1) action needs to be set to /account/loginProcessingURL
                 // 2) input field for username needs to be named "username"
                 // 3) input field for password needs to be named "password"
 
-//        http.logout(formLogout -> formLogout
-//                .invalidateHttpSession(true)
-//                // this is the URL that the will log the user out
-//                .logoutURl("/account/logout")
-//                .
+        // this is the URL that will log a user out
+                http.logout(formLogout -> formLogout
+                        .invalidateHttpSession(true)
+                        // this is the URL that will log a user out
+                        .logoutUrl("/login/logout")
+                        .logoutSuccessUrl("/"));
 
         return http.build();
     }
