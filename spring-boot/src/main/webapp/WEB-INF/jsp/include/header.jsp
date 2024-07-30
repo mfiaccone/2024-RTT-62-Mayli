@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,9 +23,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <sec:authorize access="!isAuthenticated()">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/account/loginPageUrl">Log In</a>
                 </li>
+                </sec:authorize>
+
+                <sec:authorize access="isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/login/logout">Log Out</a>
+                </li>
+                </sec:authorize>
+
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/account/create-account">Create Account</a>
                 </li>
@@ -56,10 +68,18 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/file-upload">File Upload</a>
                 </li>
-                </li>
+
+                <sec:authorize access="hasAnyAuthority('ADMIN')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">Admin Dashboard</a>
+                    </li>
+                </sec:authorize>
+
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/login/logout">Log Out</a>
+                    <span class="nav-link"><sec:authentication property="name"/></span>
                 </li>
+
+
 
             </ul>
         </div>
