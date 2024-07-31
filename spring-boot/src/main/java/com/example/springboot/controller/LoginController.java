@@ -3,10 +3,13 @@ package com.example.springboot.controller;
 import com.example.springboot.database.dao.*;
 import com.example.springboot.database.entity.*;
 import com.example.springboot.form.*;
+import com.example.springboot.security.AuthenticatedUserUtilities;
 import com.example.springboot.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.*;
 import lombok.extern.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +28,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthenticatedUserUtilities authenticatedUserUtilities;
+
 
     @GetMapping("/create-account")
     public ModelAndView createAccount() {
@@ -41,7 +47,7 @@ public class LoginController {
     }
 
     @PostMapping("/create-account")
-    public ModelAndView createAccountSubmit(@Valid CreateAccountFormBean form, BindingResult bindingResult) {
+    public ModelAndView createAccountSubmit(@Valid CreateAccountFormBean form, BindingResult bindingResult, HttpSession session) {
         ModelAndView response = new ModelAndView("auth/create-account");
 
         if (form.getEmail() != null ) {
@@ -62,6 +68,7 @@ public class LoginController {
         } else {
             // there were no errors so we can create the new user in the database
             userService.createUser(form);
+            authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
 
         }
 

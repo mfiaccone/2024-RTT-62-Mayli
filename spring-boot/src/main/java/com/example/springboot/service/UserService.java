@@ -1,7 +1,9 @@
 package com.example.springboot.service;
 
 import com.example.springboot.database.dao.UserDAO;
+import com.example.springboot.database.dao.UserRoleDAO;
 import com.example.springboot.database.entity.User;
+import com.example.springboot.database.entity.UserRole;
 import com.example.springboot.form.CreateAccountFormBean;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserRoleDAO userRoleDao;
+
     public User createUser(CreateAccountFormBean form) {
         User user = new User();
 
@@ -34,6 +39,13 @@ public class UserService {
 
         // save the user to the database
         userDao.save(user);
+
+        // create a user role for the user
+        UserRole userRole = new UserRole();
+        userRole.setRoleName("USER");
+        userRole.setUserId(user.getId());
+
+        userRoleDao.save(userRole);
 
         return user;
     }
