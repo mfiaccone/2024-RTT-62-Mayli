@@ -49,4 +49,17 @@ public class UserService {
 
         return user;
     }
+
 }
+
+//Decouple method
+//
+//private UserRole createUserRole(Integer userId, String roleName) {
+//    UserRole userRole = new UserRole();
+//    userRole.setUserId(userId);
+//    userRole.setRoleName(roleName);
+//
+//    userRoleDAO.save(userRole);
+//
+//    return userRole;
+//}
